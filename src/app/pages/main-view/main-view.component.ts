@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 
+
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
@@ -41,7 +42,8 @@ export class MainViewComponent implements OnInit {
    * This function open a input field for a new task
    * @param listname is the ID of the task input field for the choosen list
    */
-  AddNewTask(listname: string) {
+  AddNewTask(i: number, listname: string) {
+    (<HTMLInputElement>document.getElementById(listname + i)).value = '';
     document.getElementById(listname)?.classList.remove('hidden');
   }
 
@@ -51,9 +53,10 @@ export class MainViewComponent implements OnInit {
    * @param listnname is the ID of the div container for new task input field for the choosen list
    */
   saveNewTask(i: number, listnname: string) {
-    var task: any = (<HTMLInputElement>document.getElementById(listnname + i)).value;
+    let task: any = (<HTMLInputElement>document.getElementById(listnname + i)).value;
     this.board.lists[i].tasks.push(task);
-    task = null;
+    console.log(this.board.lists[i].tasks);
+
   }
 
   /**
@@ -63,6 +66,12 @@ export class MainViewComponent implements OnInit {
   deleteNewTask(listname: string) {
     document.getElementById(listname)?.classList.add('hidden');
   }
+
+  /**
+   * This function edit the name of the choosen task
+     * @param i is the number of the list
+     * @param y is the number of the task
+   */
 
   editTask(i: number, y: number) {
     console.log(this.board.lists[i].tasks[y])
@@ -78,13 +87,7 @@ export class MainViewComponent implements OnInit {
     this.board.lists[i].tasks.splice(y, 1);
   }
 
-  /**
-   * This function delete the chossen list
-   * @param i is the number of the list
-   */
-  deleteList(i: number) {
-    this.board.lists.splice(i, 1);
-  }
+
 
 
   /**
@@ -103,23 +106,36 @@ export class MainViewComponent implements OnInit {
     ]))
   }
 
-
   /**
    * This function close the field for the new list
    */
   deleteNewList() {
     document.getElementById('newList')?.classList.add('hidden');
+  }
 
+  /**
+   * This function edit the name of the choosen list
+   * @param i is the number of the list
+   */
+  editList(i: number) {
+    console.log(i);
+  }
+
+
+  /**
+ * This function delete the chossen list
+ * @param i is the number of the list
+ */
+  deleteList(i: number) {
+    this.board.lists.splice(i, 1);
   }
 
 
 
-
-/**
- * This function is for the drag and drop function
- * @param event Drag and Drop
- */
-
+  /**
+   * This function is for the drag and drop function
+   * @param event Drag and Drop
+   */
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

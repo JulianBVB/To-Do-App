@@ -19,6 +19,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 import {MatDialogModule} from '@angular/material/dialog';
 
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -38,7 +39,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule
     
   ],
   providers: [],

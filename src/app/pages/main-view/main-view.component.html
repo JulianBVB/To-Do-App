@@ -24,7 +24,7 @@
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item>Name ändern</button>
+                            <button (click)="editList(i)" mat-menu-item>Name ändern</button>
                             <button (click)="deleteList(i)" mat-menu-item>Liste löschen</button>
                         </mat-menu>
 
@@ -33,8 +33,7 @@
 
                     <div class="tasks-container" cdkDropList [cdkDropListData]="list.tasks"
                         (cdkDropListDropped)="drop($event)">
-                        <div (click)="editTask(i,y)" class="task" *ngFor="let item of list.tasks;let y = index"
-                            cdkDrag>
+                        <div (click)="editTask(i,y)" class="task" *ngFor="let item of list.tasks;let y = index" cdkDrag>
                             <div>{{item}}</div>
                             <div>
                                 <mat-icon (click)="deleteTask(i,y)" class="deleteButton">clear</mat-icon>
@@ -47,18 +46,21 @@
 
                         <div class="tasks-container">
                             <div id="{{list.name}}" class="hidden addTask">
-                                <input id="{{list.name}}{{i}}" matInput placeholder="neue Aufgabe">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>New Task</mat-label>
+                                    <input id="{{list.name}}{{i}}" matInput placeholder="neue Aufgabe">
+                                </mat-form-field>
+
                                 <div>
                                     <mat-icon (click)="deleteNewTask(list.name)">clear</mat-icon>
-                                    <mat-icon
-                                        (click)="saveNewTask(i, list.name); deleteNewTask(list.name)">done
+                                    <mat-icon (click)="saveNewTask(i, list.name); deleteNewTask(list.name)">done
                                     </mat-icon>
                                 </div>
                             </div>
                         </div>
 
                         <div class="tasks-container">
-                            <div (click)="AddNewTask(list.name)" class="addTask">
+                            <div (click)="AddNewTask(i, list.name)" class="addTask">
                                 Aufgabe hinzufügen
                             </div>
                         </div>
