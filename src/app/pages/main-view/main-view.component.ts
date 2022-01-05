@@ -55,8 +55,6 @@ export class MainViewComponent implements OnInit {
   saveNewTask(i: number, listnname: string) {
     let task: any = (<HTMLInputElement>document.getElementById(listnname + i)).value;
     this.board.lists[i].tasks.push(task);
-    console.log(this.board.lists[i].tasks);
-
   }
 
   /**
@@ -72,7 +70,6 @@ export class MainViewComponent implements OnInit {
      * @param i is the number of the list
      * @param y is the number of the task
    */
-
   editTask(i: number, y: number) {
     console.log(this.board.lists[i].tasks[y])
   }
@@ -94,6 +91,7 @@ export class MainViewComponent implements OnInit {
    * This function open a input field for a new list
    */
   addNewList() {
+    (<HTMLInputElement>document.getElementById('newListElement')).value='';
     document.getElementById('newList')?.classList.remove('hidden');
   }
 

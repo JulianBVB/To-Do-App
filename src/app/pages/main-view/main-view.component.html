@@ -85,10 +85,8 @@
                     <div class="tasks-container">
                         <div id="newList" class="hidden addTask">
                             <input id="newListElement" matInput placeholder="neue Liste">
-                            <div>
-                                <mat-icon (click)="deleteNewList()">clear</mat-icon>
-                                <mat-icon (click)="saveNewList(); deleteNewList()">done</mat-icon>
-                            </div>
+                            <mat-icon (click)="deleteNewList()">clear</mat-icon>
+                            <mat-icon (click)="saveNewList(); deleteNewList()">done</mat-icon>
                         </div>
                     </div>
 
