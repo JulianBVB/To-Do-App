@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kanban-52d6d": {
+      "hosting": {
+        "kanban": [
+          "kanban-52d6d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kanban-52d6d"
+  }
+}

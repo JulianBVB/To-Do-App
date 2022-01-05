@@ -1,0 +1,97 @@
+<div class="root">
+    <div class="navbar has-background-dark">
+        <div class="navbar-brand">
+            <div class="navbar-item">
+                <h1 class="app-name has-gradient-text">TO-DO</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="board">
+
+        <div class="board-bar">
+            <p class="board-name"></p>
+        </div>
+
+        <div class="board-wrapper">
+
+            <div class="board-lists" cdkDropListGroup>
+                <div class="board-list" *ngFor="let list of board.lists;let i = index">
+                    <div class="list-title">
+                        <p> {{list.name}}</p>
+                        <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item>Name ändern</button>
+                            <button (click)="deleteList(i)" mat-menu-item>Liste löschen</button>
+                        </mat-menu>
+
+
+                    </div>
+
+                    <div class="tasks-container" cdkDropList [cdkDropListData]="list.tasks"
+                        (cdkDropListDropped)="drop($event)">
+                        <div (click)="editTask(i,y)" class="task" *ngFor="let item of list.tasks;let y = index"
+                            cdkDrag>
+                            <div>{{item}}</div>
+                            <div>
+                                <mat-icon (click)="deleteTask(i,y)" class="deleteButton">clear</mat-icon>
+                                <mat-icon>edit</mat-icon>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="tasks-container">
+                            <div id="{{list.name}}" class="hidden addTask">
+                                <input id="{{list.name}}{{i}}" matInput placeholder="neue Aufgabe">
+                                <div>
+                                    <mat-icon (click)="deleteNewTask(list.name)">clear</mat-icon>
+                                    <mat-icon
+                                        (click)="saveNewTask(i, list.name); deleteNewTask(list.name)">done
+                                    </mat-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tasks-container">
+                            <div (click)="AddNewTask(list.name)" class="addTask">
+                                Aufgabe hinzufügen
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="board-list">
+                    <div class="list-title">
+                        Liste hinzufügen
+                        <button (click)="addNewList()" mat-mini-fab color="primary"
+                            aria-label="Example icon button with a menu icon">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+
+
+                    <div class="tasks-container">
+                        <div id="newList" class="hidden addTask">
+                            <input id="newListElement" matInput placeholder="neue Liste">
+                            <div>
+                                <mat-icon (click)="deleteNewList()">clear</mat-icon>
+                                <mat-icon (click)="saveNewList(); deleteNewList()">done</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
